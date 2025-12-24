@@ -1,10 +1,7 @@
 import React from "react";
 import YandexMap from "./YandexMap";
-import { useWeather } from "./weather.hook";
 
 const Footer: React.FC = () => {
-  const data = useWeather('fromFooter');
-  console.log('data from Footer', data);
   return (
     <footer className="border-t border-gray-200 bg-[#f9f8f6] pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">

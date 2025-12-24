@@ -1,10 +1,6 @@
 import React from "react";
-import { useWeather } from "./weather.hook";
 
 const Header: React.FC = () => {
-
-  const data = useWeather('fromHeader');
-  console.log('data from Header', data);
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl shadow-[0_2px_6px_rgba(0,0,0,0.04)] border-b border-gray-100">
