@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.no-break {
+    word-break: keep-all;
+  }
+  

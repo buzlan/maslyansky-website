@@ -1,0 +1,85 @@
+import React from "react";
+import person from "../images/person.jpeg";
+
+const Hero: React.FC = () => {
+  return (
+    <section
+      id="top"
+      className="hero-bg pt-16 md:pt-24 pb-20 md:pb-28 border-b border-white"
+    >
+      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-[60%_40%] gap-12 items-start">
+        
+        <div>
+          <p className="inline-flex items-center gap-2 bg-white/80 px-4 py-1 rounded-full text-gray-600 text-sm shadow">
+            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+            Приём врача-флеболога
+          </p>
+
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#1C2A44] mt-4 mb-6 leading-tight">
+            <span className="block">Забота о здоровье вен</span>
+            <span className="block">и внимательный подход</span>
+          </h1>
+
+          <p className="text-gray-700 text-base md:text-lg max-w-lg mb-6">
+            Маслянский Вячеслав Борисович — врач-флеболог, специализирующийся
+            на диагностике и лечении заболеваний вен. Современные методы и
+            индивидуальная тактика лечения.
+          </p>
+
+          <ul className="text-gray-700 text-sm space-y-2 mb-8">
+            <li>• Варикозная болезнь, сосудистые "сеточки"</li>
+            <li>• Тяжесть, усталость, отёки ног</li>
+            <li>• Лечение и профилактика венозной недостаточности</li>
+          </ul>
+
+          <div className="flex gap-4 flex-wrap">
+            <a
+              href="#contacts"
+              className="px-6 py-3 rounded-full bg-[#1C2A44] text-white font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
+            >
+              Записаться
+            </a>
+
+            <a
+              href="#when"
+              className="px-6 py-3 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:border-[#C5A572] hover:text-[#1C2A44] transition"
+            >
+              Когда обращаться
+            </a>
+          </div>
+        </div>
+
+        <div className="flex justify-center md:justify-end md:mt-10">
+            <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-[320px] md:w-[380px] lg:w-[420px]">
+            <div className="w-full bg-white flex justify-center">
+              <img
+                src={person}
+                alt="Маслянский Вячеслав Борисович"
+                className="w-full object-contain"
+              />
+            </div>
+
+            <div className="p-6">
+              <p className="text-xs text-gray-500 uppercase tracking-wide">
+                врач-флеболог
+              </p>
+
+              <p className="font-serif text-xl text-[#1C2A44] mt-1">
+                Маслянский Вячеслав Борисович
+              </p>
+
+              <p className="text-gray-600 text-sm mt-2 leading-relaxed">
+                Специалист по диагностике и лечению заболеваний вен.
+                Индивидуальный подход, современные методики и многолетний опыт
+                позволяют достигать оптимальных результатов в лечении.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
