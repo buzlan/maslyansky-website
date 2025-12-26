@@ -54,7 +54,7 @@ const WhenToSee: React.FC = () => {
           и ниже риск осложнений.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 mb-8">
 
           <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
             <h3 className="font-semibold text-lg text-[#1C2A44] mb-4">
@@ -83,8 +83,8 @@ const WhenToSee: React.FC = () => {
 
         </div>
 
-        <div className="grid md:grid-cols-[60%_40%] gap-8">
-          <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
+        <div className="flex md:flex-row flex-col gap-8">
+          <div className="flex-1 bg-white shadow-xl border border-white/70 rounded-3xl p-8">
             <h3 className="font-semibold text-lg text-[#1C2A44] mb-6 text-center">
               Факторы риска
             </h3>
@@ -103,7 +103,7 @@ const WhenToSee: React.FC = () => {
             </ul>
           </div>
 
-          <div className="flex justify-center md:justify-start">
+          <div className="flex-shrink-0 flex justify-center md:justify-start">
             <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-full max-w-[400px] relative">
               <div className="w-full bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center aspect-[3/4] relative overflow-hidden">
                 <img
