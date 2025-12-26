@@ -6,7 +6,7 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
 
         <h2 className="font-serif text-4xl md:text-5xl text-[#1C2A44] mb-6">
-          Услуги и направления работы
+          Разделы
         </h2>
 
         <p className="text-gray-700 text-lg mb-12 max-w-3xl">
@@ -24,14 +24,24 @@ const Services: React.FC = () => {
               Первичная консультация флеболога
             </h3>
 
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Подробный разбор жалоб, осмотр вен, формирование предварительного диагноза и рекомендаций.
+            <p className="text-gray-700 leading-relaxed">
+              Подробный разбор жалоб, факторов риска, осмотр и ультразвуковой скрининг вен, формирование диагноза и рекомендаций.
+            </p>
+          </div>
+
+          <div className="bg-white p-8 rounded-3xl shadow-xl border border-white/70">
+            <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">
+              Лечение
             </p>
 
+            <h3 className="text-lg font-semibold text-[#1C2A44] mb-4">
+              Индивидуальный план лечения и профилактики
+            </h3>
+
             <ul className="text-gray-700 space-y-2">
-              <li>• анализ факторов риска;</li>
-              <li>• оценка венозной системы;</li>
-              <li>• рекомендации по режиму и активности.</li>
+              <li>• Выбор оптимальной методики, либо сочетание методик лечения для каждого конкретного пациента</li>
+              <li>• Сеансы склеротерапии</li>
+              <li>• Рациональная фармакотерапия и подбор компрессионного трикотажа</li>
             </ul>
           </div>
 
@@ -52,26 +62,6 @@ const Services: React.FC = () => {
               <li>• оценка эффективности терапии;</li>
               <li>• корректировка рекомендаций;</li>
               <li>• профилактическое наблюдение.</li>
-            </ul>
-          </div>
-
-          <div className="bg-white p-8 rounded-3xl shadow-xl border border-white/70">
-            <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">
-              Лечение
-            </p>
-
-            <h3 className="text-lg font-semibold text-[#1C2A44] mb-4">
-              План терапии и профилактика
-            </h3>
-
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Подбор тактики лечения, препаратов, компрессионного трикотажа и мер профилактики.
-            </p>
-
-            <ul className="text-gray-700 space-y-2">
-              <li>• индивидуальная схема терапии;</li>
-              <li>• рекомендации по физической активности;</li>
-              <li>• профилактика обострений.</li>
             </ul>
           </div>
 
