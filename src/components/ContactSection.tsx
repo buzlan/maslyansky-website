@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 const ContactSection: React.FC = () => {
-  const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", personalData: false, newsletter: false });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const [fadeOut, setFadeOut] = useState(false);
@@ -27,8 +27,16 @@ const ContactSection: React.FC = () => {
     };
   }, [status]);
 
-  const handleChange = (field: "name" | "phone" | "message") => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (field: "name" | "phone" | "email" | "message") => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const handleCheckboxChange = (field: "personalData" | "newsletter") => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setForm((prev) => ({ ...prev, [field]: event.target.checked }));
+  };
+
+  const validateEmail = (email: string): boolean => {
+    return email.includes("@") && email.length > 3;
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -36,8 +44,18 @@ const ContactSection: React.FC = () => {
     setStatus("idle");
     setError(null);
 
-    if (!form.name || !form.phone || !form.message) {
+    if (!form.name || !form.phone || !form.email || !form.message) {
       setError("Заполните все поля формы.");
+      return;
+    }
+
+    if (!validateEmail(form.email)) {
+      setError("Введите корректный email адрес.");
+      return;
+    }
+
+    if (!form.personalData) {
+      setError("Необходимо согласие на обработку персональных данных.");
       return;
     }
 
@@ -61,7 +79,10 @@ const ContactSection: React.FC = () => {
             to_email: toEmail,
             user_name: form.name,
             user_phone: form.phone,
+            user_email: form.email,
             message: form.message,
+            personal_data: form.personalData ? "Да" : "Нет",
+            newsletter: form.newsletter ? "Да" : "Нет",
           },
         }),
       });
@@ -71,7 +92,7 @@ const ContactSection: React.FC = () => {
       }
 
       setStatus("success");
-      setForm({ name: "", phone: "", message: "" });
+      setForm({ name: "", phone: "", email: "", message: "", personalData: false, newsletter: false });
     } catch (err) {
       setStatus("error");
       setError("Не удалось отправить сообщение. Попробуйте позже.");
@@ -152,6 +173,16 @@ const ContactSection: React.FC = () => {
               </div>
 
               <div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={handleChange("email")}
+                  className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                />
+              </div>
+
+              <div>
                 <textarea
                   rows={4}
                   placeholder="Опишите вашу ситуацию"
@@ -159,6 +190,32 @@ const ContactSection: React.FC = () => {
                   onChange={handleChange("message")}
                   className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
                 />
+              </div>
+
+              <div className="space-y-3">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.personalData}
+                    onChange={handleCheckboxChange("personalData")}
+                    className="mt-1 w-4 h-4 text-[#1C2A44] border-gray-300 rounded focus:ring-[#C5A572] cursor-pointer"
+                  />
+                  <span className="text-sm text-gray-700">
+                    Согласен на обработку персональных данных
+                  </span>
+                </label>
+
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.newsletter}
+                    onChange={handleCheckboxChange("newsletter")}
+                    className="mt-1 w-4 h-4 text-[#1C2A44] border-gray-300 rounded focus:ring-[#C5A572] cursor-pointer"
+                  />
+                  <span className="text-sm text-gray-700">
+                    Хочу получать рассылку на почту
+                  </span>
+                </label>
               </div>
 
               {error && (

@@ -9,14 +9,9 @@ const Approach: React.FC = () => {
           Подход к лечению
         </h2>
 
-        <p className="text-gray-700 text-lg max-w-3xl leading-relaxed mb-10">
+        <p className="text-gray-700 text-lg max-w-3xl leading-relaxed mb-16">
           Задача флеболога — не только устранить эстетические или физические проявления варикоза,
           но и обеспечить долгосрочный результат, снизить риск осложнений и улучшить качество жизни пациента.
-        </p>
-
-        <p className="text-gray-700 text-lg max-w-3xl leading-relaxed mb-16">
-          На консультации подробно обсуждаются методы лечения, их эффективность, возможные
-          ограничения и прогноз. Пациент получает ясный и понятный план действий.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -27,8 +22,7 @@ const Approach: React.FC = () => {
             </h3>
 
             <p className="text-gray-700 leading-relaxed">
-              Работа строго по современным клиническим рекомендациям
-              и стандартам флебологии.
+              Работа строго по современным российским и международным клиническим рекомендациям и протоколам.
             </p>
           </div>
 
@@ -45,12 +39,11 @@ const Approach: React.FC = () => {
 
           <div className="bg-white p-8 rounded-3xl shadow-xl border border-white/70">
             <h3 className="text-lg font-semibold text-[#1C2A44] mb-3">
-              Прозрачное объяснение
+              Доступное объяснение
             </h3>
 
             <p className="text-gray-700 leading-relaxed">
-              Пациент понимает, что происходит с венами и почему назначается
-              определённый метод лечения.
+              Пациент должен понимать, что происходит с венами и почему назначается тот или иной метод лечения.
             </p>
           </div>
 

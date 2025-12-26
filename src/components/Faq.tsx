@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const faq = [
   {
@@ -20,6 +20,12 @@ const faq = [
 ];
 
 const Faq: React.FC = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleQuestion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <section id="faq" className="py-24 border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4">
@@ -28,14 +34,30 @@ const Faq: React.FC = () => {
           Часто задаваемые вопросы
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {faq.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-all"
             >
-              <p className="font-semibold text-[#1C2A44] mb-2">{item.q}</p>
-              <p className="text-gray-600 leading-relaxed">{item.a}</p>
+              <button
+                onClick={() => toggleQuestion(i)}
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+              >
+                <p className="font-semibold text-[#1C2A44] pr-4">{item.q}</p>
+                <span className={`text-[#1C2A44] text-xl transition-transform duration-300 flex-shrink-0 ${openIndex === i ? 'rotate-180' : ''}`}>
+                  ▼
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIndex === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-6 pt-0">
+                  <p className="text-gray-600 leading-relaxed">{item.a}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

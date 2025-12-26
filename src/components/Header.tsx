@@ -55,12 +55,22 @@ const Header: React.FC = () => {
             </a>
           </nav>
 
-          <a
-            href="#contacts"
-            className="hidden md:block rounded-full bg-[#C5A572] text-white px-6 py-2.5 text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
-          >
-            Запись
-          </a>
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://prodoctorov.ru/moskva/vrach/1316162-maslyanskiy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-[#1C2A44] text-[#1C2A44] px-6 py-2.5 text-sm font-semibold hover:bg-[#1C2A44] hover:text-white transition"
+            >
+              Отзыв
+            </a>
+            <a
+              href="#contacts"
+              className="rounded-full bg-[#C5A572] text-white px-6 py-2.5 text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
+            >
+              Запись
+            </a>
+          </div>
 
         </div>
       </div>

@@ -11,18 +11,19 @@ const YandexMap: React.FC = () => {
 
         window.ymaps.ready(() => {
           const map = new window.ymaps.Map("map", {
-            center: [55.67899, 37.27252],
+            center: [55.761, 37.580],
             zoom: 16,
             controls: ["zoomControl"],
           });
 
           const placemark = new window.ymaps.Placemark(
-            [55.67899, 37.27252],
+            [55.761, 37.580],
             {
-              balloonContent: "г. Одинцово, Московская область",
+              iconContent: "Доктор Дотер Маслянский",
+              balloonContent: "ул. Пресненский Вал, 16 строение 3",
             },
             {
-              preset: "islands#redIcon",
+              preset: "islands#blackStretchyIcon",
             }
           );
 
