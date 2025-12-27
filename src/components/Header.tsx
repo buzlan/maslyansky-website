@@ -1,6 +1,27 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const contactsElement = document.getElementById("contacts");
+        if (contactsElement) {
+          contactsElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const contactsElement = document.getElementById("contacts");
+      if (contactsElement) {
+        contactsElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl shadow-[0_2px_6px_rgba(0,0,0,0.04)] border-b border-gray-100">
@@ -66,6 +87,7 @@ const Header: React.FC = () => {
             </a>
             <a
               href="#contacts"
+              onClick={handleContactsClick}
               className="rounded-full bg-[#C5A572] text-white px-6 py-2.5 text-sm font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
             >
               Запись
