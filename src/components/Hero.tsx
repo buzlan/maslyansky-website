@@ -1,7 +1,29 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import person from "../images/person.jpeg";
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const contactsElement = document.getElementById("contacts");
+        if (contactsElement) {
+          contactsElement.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const contactsElement = document.getElementById("contacts");
+      if (contactsElement) {
+        contactsElement.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <section
       id="top"
@@ -41,6 +63,7 @@ const Hero: React.FC = () => {
           <div className="flex gap-4 flex-wrap">
             <a
               href="#contacts"
+              onClick={handleContactsClick}
               className="px-6 py-3 rounded-full bg-[#1C2A44] text-white font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
             >
               Записаться
