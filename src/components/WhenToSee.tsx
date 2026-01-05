@@ -54,58 +54,62 @@ const WhenToSee: React.FC = () => {
           и ниже риск осложнений.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
+        <div className="grid md:grid-cols-3 gap-8 items-start">
+          {/* Левая часть - карточки */}
+          <div className="md:col-span-2 space-y-8">
+            {/* Верхние две карточки */}
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
+                <h3 className="font-semibold text-lg text-[#1C2A44] mb-4">
+                  Видимые изменения
+                </h3>
 
-          <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
-            <h3 className="font-semibold text-lg text-[#1C2A44] mb-4">
-              Видимые изменения
-            </h3>
+                <ul className="text-gray-700 space-y-2">
+                  <li>• Варикозные узлы</li>
+                  <li>• Телеангиоэктазии («сосудистые звёздочки» и «капиллярные сетки»)</li>
+                  <li>• Пигментация (участки потемнения кожи)</li>
+                </ul>
+              </div>
 
-            <ul className="text-gray-700 space-y-2">
-              <li>• Варикозные узлы</li>
-              <li>• Телеангиоэктазии («сосудистые звёздочки» и «капиллярные сетки»)</li>
-              <li>• Пигментация (участки потемнения кожи)</li>
-            </ul>
+              <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
+                <h3 className="font-semibold text-lg text-[#1C2A44] mb-4">
+                  Неприятные ощущения
+                </h3>
+
+                <ul className="text-gray-700 space-y-2">
+                  <li>• Отёки и тяжесть в ногах</li>
+                  <li>• Судороги</li>
+                  <li>• Боль</li>
+                  <li>• Парестезии (жжение, онемение)</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Факторы риска - на всю ширину */}
+            <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
+              <h3 className="font-semibold text-lg text-[#1C2A44] mb-6 text-center">
+                Факторы риска
+              </h3>
+
+              <ul className="text-gray-700 space-y-2 grid md:grid-cols-2 gap-x-8 gap-y-2">
+                <li>• Отягощенная наследственность</li>
+                <li>• Врожденные аномалии и дефициты</li>
+                <li>• Беременность</li>
+                <li>• Возраст</li>
+                <li>• Избыточная масса тела</li>
+                <li>• Прием гормональных препаратов</li>
+                <li>• Перенесённый венозный тромбоз</li>
+                <li>• Частые перелеты и длительные поездки</li>
+                <li>• Травмы и операции</li>
+                <li>• Работа, связанная с длительным стоянием или сидением</li>
+              </ul>
+            </div>
           </div>
 
-          <div className="bg-white shadow-xl border border-white/70 rounded-3xl p-8">
-            <h3 className="font-semibold text-lg text-[#1C2A44] mb-4">
-              Неприятные ощущения
-            </h3>
-
-            <ul className="text-gray-700 space-y-2">
-              <li>• Отёки и тяжесть в ногах</li>
-              <li>• Судороги</li>
-              <li>• Боль</li>
-              <li>• Парестезии (жжение, онемение)</li>
-            </ul>
-          </div>
-
-        </div>
-
-        <div className="flex md:flex-row flex-col gap-8">
-          <div className="flex-1 bg-white shadow-xl border border-white/70 rounded-3xl p-8">
-            <h3 className="font-semibold text-lg text-[#1C2A44] mb-6 text-center">
-              Факторы риска
-            </h3>
-
-            <ul className="text-gray-700 space-y-2 grid md:grid-cols-2 gap-x-8 gap-y-2">
-              <li>• Отягощенная наследственность</li>
-              <li>• Работа, связанная с длительным стоянием или сидением</li>
-              <li>• Беременность</li>
-              <li>• Возраст</li>
-              <li>• Избыточная масса тела</li>
-              <li>• Прием гормональных препаратов</li>
-              <li>• Перенесённый венозный тромбоз</li>
-              <li>• Частые перелеты и длительные поездки</li>
-              <li>• Травмы и операции</li>
-              <li>• Врожденные аномалии и дефициты</li>
-            </ul>
-          </div>
-
-          <div className="flex-shrink-0 flex justify-center md:justify-start">
-            <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-full max-w-[400px] relative">
-              <div className="w-full bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center aspect-[3/4] relative overflow-hidden">
+          {/* Правая часть - фото */}
+          <div className="flex justify-center md:justify-start h-full">
+            <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-full max-w-[400px] relative h-full flex flex-col">
+              <div className="flex-1 bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center relative overflow-hidden min-h-0">
                 <img
                   src={photos[currentPhotoIndex].image}
                   alt={photos[currentPhotoIndex].caption}
@@ -136,7 +140,7 @@ const WhenToSee: React.FC = () => {
                 </>
               )}
 
-              <div className="p-6">
+              <div className="p-6 flex-shrink-0">
                 <p className="text-gray-600 text-sm text-center leading-relaxed">
                   {photos[currentPhotoIndex].caption}
                 </p>

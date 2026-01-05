@@ -6,7 +6,7 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4">
 
         <h2 className="font-serif text-4xl md:text-5xl text-[#1C2A44] mb-6">
-          Разделы
+          Разделы и направления работы
         </h2>
 
         <p className="text-gray-700 text-lg mb-12 max-w-3xl">

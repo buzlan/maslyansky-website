@@ -11,9 +11,15 @@ interface ServiceCard {
 const services: ServiceCard[] = [
   {
     id: "evlk",
-    title: "ЭВЛК Лазерная эндовенозная коагуляция вен под контролем УЗИ",
+    title: "ЭВЛК - Эндовенозная лазерная коагуляция под контролем УЗИ",
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
     link: "/services/evlk",
+  },
+  {
+    id: "phlebectomy",
+    title: "Минифлебэктомия",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=400&h=300&fit=crop&auto=format",
+    link: "/services/phlebectomy",
   },
   {
     id: "sclerotherapy",
@@ -22,16 +28,10 @@ const services: ServiceCard[] = [
     link: "/services/sclerotherapy",
   },
   {
-    id: "varicose",
-    title: "Лечение варикозного расширения вен",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=300&fit=crop",
-    link: "/services/varicose",
-  },
-  {
-    id: "spider-veins",
-    title: "Лечение сосудистых звездочек",
+    id: "telangiectasia",
+    title: "Телеангиоэктазии (сосудистые звёздочки)",
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop",
-    link: "/services/spider-veins",
+    link: "/services/telangiectasia",
   },
 ];
 
@@ -40,7 +40,7 @@ const ServicesGrid: React.FC = () => {
     <section id="services-grid" className="py-24">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl text-[#1C2A44] mb-12">
-          Услуги отделения
+          Виды операций и манипуляций
         </h2>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -50,11 +50,15 @@ const ServicesGrid: React.FC = () => {
               to={service.link}
               className="group relative overflow-hidden rounded-3xl shadow-xl border border-gray-200 bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100">
                 <img
                   src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
               </div>

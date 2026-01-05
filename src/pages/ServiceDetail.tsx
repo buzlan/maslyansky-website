@@ -14,7 +14,7 @@ interface Service {
 const servicesData: Service[] = [
   {
     id: "evlk",
-    title: "ЭВЛК Лазерная эндовенозная коагуляция вен под контролем УЗИ",
+    title: "ЭВЛК - Эндовенозная лазерная коагуляция под контролем УЗИ",
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=500&fit=crop",
     description: "Современный метод лечения варикозной болезни, основанный на воздействии лазерного излучения на стенку вены изнутри. Процедура выполняется под контролем ультразвукового исследования.",
     details: [
@@ -26,16 +26,16 @@ const servicesData: Service[] = [
     ],
   },
   {
-    id: "clacs",
-    title: "КЛаКс лазерное удаление сосудистых образований",
-    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=500&fit=crop",
-    description: "Инновационный метод удаления сосудистых звёздочек и капиллярных сеток с помощью лазерного излучения. Безболезненная процедура с отличным косметическим эффектом.",
+    id: "phlebectomy",
+    title: "Минифлебэктомия",
+    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=500&fit=crop&auto=format",
+    description: "Хирургический метод удаления варикозно расширенных вен через минимальные разрезы. Применяется при невозможности использования других методов лечения.",
     details: [
-      "Безболезненная процедура",
-      "Короткое время сеанса",
-      "Отличный косметический результат",
-      "Без реабилитационного периода",
-      "Подходит для чувствительной кожи",
+      "Минимальные разрезы",
+      "Быстрая реабилитация",
+      "Высокая эффективность",
+      "Применяется под местной анестезией",
+      "Отличные отдаленные результаты",
     ],
   },
   {
@@ -52,21 +52,8 @@ const servicesData: Service[] = [
     ],
   },
   {
-    id: "varicose",
-    title: "Лечение варикозного расширения вен",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop",
-    description: "Комплексный подход к лечению варикозной болезни с использованием современных методов. Индивидуальный подбор тактики лечения для каждого пациента.",
-    details: [
-      "Индивидуальный подход к каждому пациенту",
-      "Использование современных методик",
-      "Комплексное лечение",
-      "Профилактика рецидивов",
-      "Длительное наблюдение",
-    ],
-  },
-  {
-    id: "spider-veins",
-    title: "Лечение сосудистых звездочек",
+    id: "telangiectasia",
+    title: "Телеангиоэктазии (сосудистые звёздочки)",
     image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=500&fit=crop",
     description: "Эффективное удаление телеангиоэктазий (сосудистых звёздочек) с помощью различных методик. Восстановление эстетики кожи и профилактика прогрессирования.",
     details: [
@@ -77,19 +64,6 @@ const servicesData: Service[] = [
       "Комфортное восстановление",
     ],
   },
-  {
-    id: "phlebectomy",
-    title: "Миниинвазивная флебэктомия",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=500&fit=crop",
-    description: "Хирургический метод удаления варикозно расширенных вен через минимальные разрезы. Применяется при невозможности использования других методов лечения.",
-    details: [
-      "Минимальные разрезы",
-      "Быстрая реабилитация",
-      "Высокая эффективность",
-      "Применяется под местной анестезией",
-      "Отличные отдаленные результаты",
-    ],
-  },
 ];
 
 const ServiceDetail: React.FC = () => {
@@ -97,7 +71,7 @@ const ServiceDetail: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, [id]);
 
   const service = servicesData.find((s) => s.id === id);
@@ -124,7 +98,10 @@ const ServiceDetail: React.FC = () => {
       <main className="flex-1 py-24">
         <div className="max-w-7xl mx-auto px-4">
           <button
-            onClick={() => navigate("/")}
+            onClick={() => {
+              // Навигация с флагом, что нужно прокрутить к услугам
+              navigate("/", { state: { scrollToServices: true } });
+            }}
             className="mb-8 text-[#1C2A44] hover:text-[#C5A572] transition-colors flex items-center gap-2"
           >
             <span>←</span> Назад к услугам
@@ -149,18 +126,46 @@ const ServiceDetail: React.FC = () => {
               {service.description}
             </p>
 
-            <h2 className="font-semibold text-xl text-[#1C2A44] mb-4">
-              Особенности процедуры:
-            </h2>
+            {id === "telangiectasia" ? (
+              <div>
+                <h2 className="font-semibold text-xl text-[#1C2A44] mb-4">
+                  Методы лечения:
+                </h2>
+                <div className="space-y-6">
+                  <div className="bg-gray-50 rounded-2xl p-6">
+                    <h3 className="font-semibold text-lg text-[#1C2A44] mb-3">
+                      А) Микросклеротерапия
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      Метод лечения сосудистых звёздочек путём введения специального препарата (склерозанта) в просвет мелких сосудов. Эффективен для удаления телеангиоэктазий небольшого размера.
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 rounded-2xl p-6">
+                    <h3 className="font-semibold text-lg text-[#1C2A44] mb-3">
+                      Б) КЛАКС
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      Лазерное удаление сосудистых образований с помощью специального лазерного оборудования. Безболезненная процедура с отличным косметическим эффектом, подходит для различных типов сосудистых звёздочек.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <h2 className="font-semibold text-xl text-[#1C2A44] mb-4">
+                  Особенности процедуры:
+                </h2>
 
-            <ul className="space-y-3 text-gray-700">
-              {service.details.map((detail, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="text-[#C5A572] mt-1">•</span>
-                  <span>{detail}</span>
-                </li>
-              ))}
-            </ul>
+                <ul className="space-y-3 text-gray-700">
+                  {service.details.map((detail, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="text-[#C5A572] mt-1">•</span>
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <a

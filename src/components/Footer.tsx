@@ -11,23 +11,15 @@ const Footer: React.FC = () => {
             Маслянский Вячеслав Борисович
           </h3>
 
-          <p className="text-gray-500 mb-4">врач-флеболог</p>
+          <p className="text-gray-500 mb-4">Врач-флеболог</p>
 
           <p className="text-gray-700 leading-relaxed mb-4 max-w-md">
             Диагностика и лечение заболеваний вен. Индивидуальный подход,
-            современная флебология и уважение к каждому пациенту. (Updated 24.12.2025)
-          </p>
-
-          <p className="text-gray-700 mb-2">
-            <strong>Телефон:</strong> +7 (495) 123-45-67
-          </p>
-
-          <p className="text-gray-700 mb-2">
-            <strong>Email:</strong> example@example.com
+            современная флебология и уважение к каждому пациенту.
           </p>
 
           <p className="text-gray-700">
-            <strong>Адрес:</strong> Московская область, г. Одинцово
+            <strong>Адрес:</strong> г. Москва
           </p>
         </div>
 

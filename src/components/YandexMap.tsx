@@ -10,17 +10,20 @@ const YandexMap: React.FC = () => {
         clearInterval(interval);
 
         window.ymaps.ready(() => {
+          // Координаты для адреса: г. Москва, Пресненский вал 16, стр. 3
+          const coordinates: [number, number] = [55.765, 37.562];
+          
           const map = new window.ymaps.Map("map", {
-            center: [55.761, 37.580],
+            center: coordinates,
             zoom: 16,
             controls: ["zoomControl"],
           });
 
           const placemark = new window.ymaps.Placemark(
-            [55.761, 37.580],
+            coordinates,
             {
-              iconContent: "Доктор Дотер Маслянский",
-              balloonContent: "ул. Пресненский Вал, 16 строение 3",
+              iconContent: "Клиника 'Варикоза Нет'",
+              balloonContent: "г. Москва, Пресненский вал 16, стр. 3<br/>(метро 'улица 1905 года')",
             },
             {
               preset: "islands#blackStretchyIcon",
