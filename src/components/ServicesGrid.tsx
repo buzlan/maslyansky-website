@@ -48,29 +48,29 @@ const ServicesGrid: React.FC = () => {
             <Link
               key={service.id}
               to={service.link}
-              className="group relative overflow-hidden rounded-3xl shadow-xl border border-gray-200 bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+              className="group relative overflow-hidden rounded-3xl shadow-xl border border-gray-200 bg-white hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 active:scale-[0.98] active:translate-y-0"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300 group-hover:from-black/80" />
               </div>
               
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="text-white font-semibold text-base md:text-lg leading-tight drop-shadow-lg">
+              <div className="absolute bottom-0 left-0 right-0 p-6 transition-transform duration-300 group-hover:translate-y-[-4px]">
+                <h3 className="text-white font-semibold text-base md:text-lg leading-tight drop-shadow-lg transition-all duration-300 group-hover:text-[#C5A572]">
                   {service.title}
                 </h3>
               </div>
 
-              <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                <span className="text-[#1C2A44] text-xl font-bold">→</span>
+              <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg group-hover:scale-110 group-hover:rotate-[-5deg]">
+                <span className="text-[#1C2A44] text-xl font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
               </div>
             </Link>
           ))}
