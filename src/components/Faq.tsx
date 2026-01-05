@@ -38,23 +38,31 @@ const Faq: React.FC = () => {
           {faq.map((item, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-all"
+              className={`bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 ${
+                openIndex === i ? 'shadow-md border-[#C5A572]/30' : ''
+              }`}
             >
               <button
                 onClick={() => toggleQuestion(i)}
-                className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-all duration-300 active:scale-[0.99]"
               >
-                <p className="font-semibold text-[#1C2A44] pr-4">{item.q}</p>
-                <span className={`text-[#1C2A44] text-xl transition-transform duration-300 flex-shrink-0 ${openIndex === i ? 'rotate-180' : ''}`}>
+                <p className={`font-semibold text-[#1C2A44] pr-4 transition-colors duration-300 ${
+                  openIndex === i ? 'text-[#C5A572]' : ''
+                }`}>{item.q}</p>
+                <span className={`text-[#1C2A44] text-xl transition-all duration-300 flex-shrink-0 ${
+                  openIndex === i ? 'rotate-180 text-[#C5A572]' : ''
+                }`}>
                   ▼
                 </span>
               </button>
               <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
                   openIndex === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}
               >
-                <div className="px-6 pb-6 pt-0">
+                <div className={`px-6 pb-6 pt-0 transition-all duration-500 ${
+                  openIndex === i ? 'translate-y-0' : '-translate-y-2'
+                }`}>
                   <p className="text-gray-600 leading-relaxed">{item.a}</p>
                 </div>
               </div>
