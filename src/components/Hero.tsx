@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
   return (
     <section
       id="top"
-      className="hero-bg pt-16 md:pt-24 pb-20 md:pb-28 border-b border-white"
+      className="hero-bg pt-16 md:pt-24 pb-20 md:pb-28"
     >
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-[60%_40%] gap-12 items-start">
         
