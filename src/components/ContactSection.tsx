@@ -1,6 +1,25 @@
 import React, { useEffect, useMemo, useState } from "react";
 
+interface Country {
+  code: string;
+  name: string;
+  flag: string;
+  phoneCode: string;
+  mask: string;
+  placeholder: string;
+}
+
+const countries: Country[] = [
+  { code: "RU", name: "Россия", flag: "🇷🇺", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (999) 123-45-67" },
+  { code: "BY", name: "Беларусь", flag: "🇧🇾", phoneCode: "+375", mask: "+375 (##) ###-##-##", placeholder: "+375 (29) 123-45-67" },
+  { code: "KZ", name: "Казахстан", flag: "🇰🇿", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (777) 123-45-67" },
+  { code: "AM", name: "Армения", flag: "🇦🇲", phoneCode: "+374", mask: "+374 (##) ###-###", placeholder: "+374 (91) 123-456" },
+  { code: "GE", name: "Грузия", flag: "🇬🇪", phoneCode: "+995", mask: "+995 (###) ###-###", placeholder: "+995 (555) 123-456" },
+];
+
 const ContactSection: React.FC = () => {
+  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", personalData: false, newsletter: false });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
@@ -27,8 +46,85 @@ const ContactSection: React.FC = () => {
     };
   }, [status]);
 
+  const formatPhoneNumber = (value: string, country: Country): string => {
+    // Убираем все нецифровые символы кроме +
+    let digits = value.replace(/[^\d+]/g, "");
+    
+    // Если начинается с кода страны, оставляем его
+    if (digits.startsWith(country.phoneCode.replace("+", ""))) {
+      digits = country.phoneCode + digits.slice(country.phoneCode.length);
+    } else if (!digits.startsWith("+")) {
+      digits = country.phoneCode + digits;
+    }
+
+    // Убираем + для форматирования
+    const numbers = digits.replace(/\+/g, "").replace(country.phoneCode.replace("+", ""), "");
+    
+    // Применяем маску в зависимости от страны
+    if (country.code === "RU" || country.code === "KZ") {
+      // +7 (XXX) XXX-XX-XX
+      if (numbers.length <= 3) {
+        return country.phoneCode + (numbers ? ` (${numbers}` : "");
+      } else if (numbers.length <= 6) {
+        return country.phoneCode + ` (${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+      } else if (numbers.length <= 8) {
+        return country.phoneCode + ` (${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6)}`;
+      } else {
+        return country.phoneCode + ` (${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 8)}-${numbers.slice(8, 10)}`;
+      }
+    } else if (country.code === "BY") {
+      // +375 (XX) XXX-XX-XX
+      if (numbers.length <= 2) {
+        return country.phoneCode + (numbers ? ` (${numbers}` : "");
+      } else if (numbers.length <= 5) {
+        return country.phoneCode + ` (${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+      } else if (numbers.length <= 7) {
+        return country.phoneCode + ` (${numbers.slice(0, 2)}) ${numbers.slice(2, 5)}-${numbers.slice(5)}`;
+      } else {
+        return country.phoneCode + ` (${numbers.slice(0, 2)}) ${numbers.slice(2, 5)}-${numbers.slice(5, 7)}-${numbers.slice(7, 9)}`;
+      }
+    } else if (country.code === "AM") {
+      // +374 (XX) XXX-###
+      if (numbers.length <= 2) {
+        return country.phoneCode + (numbers ? ` (${numbers}` : "");
+      } else if (numbers.length <= 5) {
+        return country.phoneCode + ` (${numbers.slice(0, 2)}) ${numbers.slice(2)}`;
+      } else {
+        return country.phoneCode + ` (${numbers.slice(0, 2)}) ${numbers.slice(2, 5)}-${numbers.slice(5, 8)}`;
+      }
+    } else if (country.code === "GE") {
+      // +995 (###) ###-###
+      if (numbers.length <= 3) {
+        return country.phoneCode + (numbers ? ` (${numbers}` : "");
+      } else if (numbers.length <= 6) {
+        return country.phoneCode + ` (${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+      } else {
+        return country.phoneCode + ` (${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 9)}`;
+      }
+    }
+    
+    return digits;
+  };
+
+  const handleCountrySelect = (country: Country) => {
+    setSelectedCountry(country);
+    setIsCountryDropdownOpen(false);
+    // Очищаем поле телефона при смене страны
+    setForm((prev) => ({ ...prev, phone: country.phoneCode + " " }));
+  };
+
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    const formatted = formatPhoneNumber(value, selectedCountry);
+    setForm((prev) => ({ ...prev, phone: formatted }));
+  };
+
   const handleChange = (field: "name" | "phone" | "email" | "message") => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [field]: event.target.value }));
+    if (field === "phone") {
+      handlePhoneChange(event as React.ChangeEvent<HTMLInputElement>);
+    } else {
+      setForm((prev) => ({ ...prev, [field]: event.target.value }));
+    }
   };
 
   const handleCheckboxChange = (field: "personalData" | "newsletter") => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +189,7 @@ const ContactSection: React.FC = () => {
 
       setStatus("success");
       setForm({ name: "", phone: "", email: "", message: "", personalData: false, newsletter: false });
+      setSelectedCountry(countries[0]);
     } catch (err) {
       setStatus("error");
       setError("Не удалось отправить сообщение. Попробуйте позже.");
@@ -110,8 +207,7 @@ const ContactSection: React.FC = () => {
           </h2>
 
           <p className="text-gray-700 text-lg mb-8 max-w-lg leading-relaxed">
-            Вы можете уточнить время приёма или оставить заявку на обратный звонок.
-            Мы свяжемся с вами в ближайшее время.
+            Вы можете записаться на приём к Маслянскому Вячеславу Борисовичу по телефону.
           </p>
 
           <div className="bg-white rounded-3xl p-8 shadow-xl border border-white/70">
@@ -119,20 +215,29 @@ const ContactSection: React.FC = () => {
             <div className="mb-6">
               <p className="text-xs uppercase text-gray-500 mb-1">Телефон</p>
               <p className="text-lg font-medium text-[#1C2A44]">
-                +375 (29) 123-45-67
+                +7(495)260-20-02
               </p>
             </div>
 
             <div className="mb-6">
-              <p className="text-xs uppercase text-gray-500 mb-1">Email</p>
-              <p className="text-gray-700 break-words">{toEmail}</p>
+              <p className="text-xs uppercase text-gray-500 mb-1">Клиника</p>
+              <p className="text-gray-700">
+                Варикоза Нет
+              </p>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-xs uppercase text-gray-500 mb-1">Адрес</p>
+              <p className="text-gray-700 leading-relaxed">
+                г. Москва, Пресненский вал 16, стр. 3<br />
+                (метро "улица 1905 года")
+              </p>
             </div>
 
             <div>
-              <p className="text-xs uppercase text-gray-500 mb-1">Адрес</p>
-              <p className="text-gray-700 leading-relaxed">
-                г. Город, ул. Примерная, 10<br />
-                (Ориентир: поликлиника, удобная парковка)
+              <p className="text-xs uppercase text-gray-500 mb-1">Время работы</p>
+              <p className="text-gray-700">
+                с 9-00 до 21-00
               </p>
             </div>
 
@@ -162,14 +267,52 @@ const ContactSection: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <input
-                  type="text"
-                  placeholder="+375…"
-                  value={form.phone}
-                  onChange={handleChange("phone")}
-                  className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
-                />
+              <div className="relative">
+                <div className="flex">
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                      className="flex items-center gap-2 px-4 py-3 border border-r-0 rounded-l-xl bg-gray-50 hover:bg-gray-100 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                    >
+                      <span className="text-xl">{selectedCountry.flag}</span>
+                      <span className="text-sm text-gray-700">{selectedCountry.phoneCode}</span>
+                      <span className="text-gray-400">▼</span>
+                    </button>
+                    
+                    {isCountryDropdownOpen && (
+                      <>
+                        <div 
+                          className="fixed inset-0 z-10" 
+                          onClick={() => setIsCountryDropdownOpen(false)}
+                        />
+                        <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
+                          {countries.map((country) => (
+                            <button
+                              key={country.code}
+                              type="button"
+                              onClick={() => handleCountrySelect(country)}
+                              className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-gray-50 transition-colors ${
+                                selectedCountry.code === country.code ? "bg-gray-50" : ""
+                              }`}
+                            >
+                              <span className="text-xl">{country.flag}</span>
+                              <span className="flex-1 text-left text-sm text-gray-700">{country.name}</span>
+                              <span className="text-sm text-gray-500">{country.phoneCode}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <input
+                    type="text"
+                    placeholder={selectedCountry.placeholder}
+                    value={form.phone}
+                    onChange={handleChange("phone")}
+                    className="flex-1 border rounded-r-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                  />
+                </div>
               </div>
 
               <div>
