@@ -62,20 +62,13 @@ const Hero: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex gap-4 flex-wrap">
+          <div>
             <a
               href="#contacts"
               onClick={handleContactsClick}
-              className="px-6 py-3 rounded-full bg-[#1C2A44] text-white font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
+              className="inline-block px-6 py-3 rounded-full bg-[#1C2A44] text-white font-semibold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition"
             >
               Записаться
-            </a>
-
-            <a
-              href="#when"
-              className="px-6 py-3 rounded-full border border-gray-300 bg-white text-gray-700 font-medium hover:border-[#C5A572] hover:text-[#1C2A44] transition"
-            >
-              Когда обращаться
             </a>
           </div>
         </div>
