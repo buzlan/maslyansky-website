@@ -1,20 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
+import CountryFlag from "./CountryFlag";
 
 interface Country {
   code: string;
   name: string;
-  flag: string;
   phoneCode: string;
   mask: string;
   placeholder: string;
 }
 
 const countries: Country[] = [
-  { code: "RU", name: "Россия", flag: "🇷🇺", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (999) 123-45-67" },
-  { code: "BY", name: "Беларусь", flag: "🇧🇾", phoneCode: "+375", mask: "+375 (##) ###-##-##", placeholder: "+375 (29) 123-45-67" },
-  { code: "KZ", name: "Казахстан", flag: "🇰🇿", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (777) 123-45-67" },
-  { code: "AM", name: "Армения", flag: "🇦🇲", phoneCode: "+374", mask: "+374 (##) ###-###", placeholder: "+374 (91) 123-456" },
-  { code: "GE", name: "Грузия", flag: "🇬🇪", phoneCode: "+995", mask: "+995 (###) ###-###", placeholder: "+995 (555) 123-456" },
+  { code: "RU", name: "Россия", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (999) 123-45-67" },
+  { code: "BY", name: "Беларусь", phoneCode: "+375", mask: "+375 (##) ###-##-##", placeholder: "+375 (29) 123-45-67" },
+  { code: "KZ", name: "Казахстан", phoneCode: "+7", mask: "+7 (###) ###-##-##", placeholder: "+7 (777) 123-45-67" },
+  { code: "AM", name: "Армения", phoneCode: "+374", mask: "+374 (##) ###-###", placeholder: "+374 (91) 123-456" },
+  { code: "GE", name: "Грузия", phoneCode: "+995", mask: "+995 (###) ###-###", placeholder: "+995 (555) 123-456" },
 ];
 
 const ContactSection: React.FC = () => {
@@ -275,7 +275,7 @@ const ContactSection: React.FC = () => {
                       onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
                       className="flex items-center gap-2 px-4 py-3 border border-r-0 rounded-l-xl bg-gray-50 hover:bg-gray-100 focus:bg-white focus:border-[#C5A572] outline-none transition"
                     >
-                      <span className="text-xl">{selectedCountry.flag}</span>
+                      <CountryFlag code={selectedCountry.code} className="w-5 h-4" />
                       <span className="text-sm text-gray-700">{selectedCountry.phoneCode}</span>
                       <span className="text-gray-400">▼</span>
                     </button>
@@ -296,7 +296,7 @@ const ContactSection: React.FC = () => {
                                 selectedCountry.code === country.code ? "bg-gray-50" : ""
                               }`}
                             >
-                              <span className="text-xl">{country.flag}</span>
+                              <CountryFlag code={country.code} className="w-5 h-4" />
                               <span className="flex-1 text-left text-sm text-gray-700">{country.name}</span>
                               <span className="text-sm text-gray-500">{country.phoneCode}</span>
                             </button>
