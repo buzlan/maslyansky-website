@@ -12,7 +12,7 @@ const services: ServiceCard[] = [
   {
     id: "evlk",
     title: "ЭВЛК - Эндовенозная лазерная коагуляция под контролем УЗИ",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+    image: "/images/evlkMain.jpeg",
     link: "/services/evlk",
   },
   {
@@ -30,7 +30,7 @@ const services: ServiceCard[] = [
   {
     id: "telangiectasia",
     title: "Телеангиоэктазии (сосудистые звёздочки)",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=300&fit=crop",
+    image: "/images/telangiectasia.jpeg",
     link: "/services/telangiectasia",
   },
 ];
@@ -69,8 +69,8 @@ const ServicesGrid: React.FC = () => {
                 </h3>
               </div>
 
-              <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg group-hover:scale-110 group-hover:rotate-[-5deg]">
-                <span className="text-[#1C2A44] text-xl font-bold transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                <span className="text-[#1C2A44] text-xl font-bold">→</span>
               </div>
             </Link>
           ))}
