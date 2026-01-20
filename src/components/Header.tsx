@@ -80,9 +80,11 @@ const Header: React.FC = () => {
         <div className="h-20 flex items-center justify-between">
 
           <div className="flex items-center gap-4 group/logo cursor-default">
-            <div className="h-12 w-12 rounded-2xl bg-[#1C2A44] text-white flex items-center justify-center text-sm font-semibold shadow transition-transform duration-300 group-hover/logo:scale-105">
-              МВ
-            </div>
+            <img 
+              src="/images/logo.jpeg" 
+              alt="Маслянский Вячеслав Борисович - Врач-флеболог"
+              className="h-12 w-12 rounded-2xl object-cover shadow transition-transform duration-300 group-hover/logo:scale-105"
+            />
 
             <div className="leading-tight">
               <div className="font-serif text-[18px] text-[#1C2A44] font-semibold transition-colors duration-300 group-hover/logo:text-[#C5A572]">
@@ -95,17 +97,6 @@ const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-[#1C2A44]">
-
-            <a 
-              href="#about" 
-              onClick={(e) => handleServiceMenuClick(e, "about")}
-              className="relative group/link hover:text-[#C5A572] transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <span className="relative">
-                О враче
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#C5A572] transition-all duration-300 group-hover/link:w-full"></span>
-              </span>
-            </a>
 
             <div className="relative group">
               <button className="inline-flex items-center gap-1 hover:text-[#C5A572] transition-all duration-300 hover:-translate-y-0.5">
@@ -200,17 +191,6 @@ const Header: React.FC = () => {
           isMobileMenuOpen ? 'max-h-[800px] opacity-100 py-4' : 'max-h-0 opacity-0 py-0'
         }`}>
             <nav className="flex flex-col space-y-4">
-              <a
-                href="#about"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleMobileMenuClick("about");
-                }}
-                className="text-[#1C2A44] hover:text-[#C5A572] transition-all duration-300 py-2 hover:translate-x-1"
-              >
-                О враче
-              </a>
-              
               <div className="space-y-2">
                 <div className="text-[#1C2A44] font-semibold py-2">Услуги</div>
                 <a
