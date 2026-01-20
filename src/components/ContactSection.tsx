@@ -199,7 +199,7 @@ const ContactSection: React.FC = () => {
 
   return (
     <section id="contacts" className="py-24 bg-[#f9f8f6]">
-      <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 md:gap-12">
 
         <div>
           <h2 className="font-serif text-4xl md:text-5xl text-[#1C2A44] mb-6">
@@ -210,7 +210,7 @@ const ContactSection: React.FC = () => {
             Вы можете записаться на приём к Маслянскому Вячеславу Борисовичу по телефону.
           </p>
 
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-white/70">
+          <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border border-white/70">
 
             <div className="mb-6">
               <p className="text-xs uppercase text-gray-500 mb-1">Телефон</p>
@@ -245,7 +245,7 @@ const ContactSection: React.FC = () => {
         </div>
 
         <div>
-          <div className="bg-white rounded-3xl p-8 shadow-xl border border-white/70">
+          <div className="bg-white rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl border border-white/70">
 
             <h3 className="text-xl font-semibold text-[#1C2A44] mb-2">
               Обратная связь
@@ -263,7 +263,7 @@ const ContactSection: React.FC = () => {
                   placeholder="Ваше имя"
                   value={form.name}
                   onChange={handleChange("name")}
-                  className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                  className="w-full border rounded-xl px-3 sm:px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition text-sm sm:text-base"
                 />
               </div>
 
@@ -273,11 +273,13 @@ const ContactSection: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-                      className="flex items-center gap-2 px-4 py-3 border border-r-0 rounded-l-xl bg-gray-50 hover:bg-gray-100 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                      className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 md:px-4 py-3 border border-r-0 rounded-l-xl bg-gray-50 hover:bg-gray-100 focus:bg-white focus:border-[#C5A572] outline-none transition text-sm sm:text-base"
                     >
-                      <CountryFlag code={selectedCountry.code} className="w-5 h-4" />
-                      <span className="text-sm text-gray-700">{selectedCountry.phoneCode}</span>
-                      <span className="text-gray-400">▼</span>
+                      <CountryFlag code={selectedCountry.code} className="w-4 h-3 sm:w-5 sm:h-4" />
+                      <span className="text-xs sm:text-sm text-gray-700">{selectedCountry.phoneCode}</span>
+                      <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
                     </button>
                     
                     {isCountryDropdownOpen && (
@@ -286,7 +288,7 @@ const ContactSection: React.FC = () => {
                           className="fixed inset-0 z-10" 
                           onClick={() => setIsCountryDropdownOpen(false)}
                         />
-                        <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
+                        <div className="absolute top-full left-0 mt-1 w-56 sm:w-64 bg-white rounded-xl shadow-lg border border-gray-200 z-20 max-h-60 overflow-y-auto">
                           {countries.map((country) => (
                             <button
                               key={country.code}
@@ -310,7 +312,7 @@ const ContactSection: React.FC = () => {
                     placeholder={selectedCountry.placeholder}
                     value={form.phone}
                     onChange={handleChange("phone")}
-                    className="flex-1 border rounded-r-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                    className="flex-1 min-w-0 border rounded-r-xl px-3 sm:px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition text-sm sm:text-base"
                   />
                 </div>
               </div>
@@ -321,7 +323,7 @@ const ContactSection: React.FC = () => {
                   placeholder="Email"
                   value={form.email}
                   onChange={handleChange("email")}
-                  className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                  className="w-full border rounded-xl px-3 sm:px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition text-sm sm:text-base"
                 />
               </div>
 
@@ -331,7 +333,7 @@ const ContactSection: React.FC = () => {
                   placeholder="Опишите вашу ситуацию"
                   value={form.message}
                   onChange={handleChange("message")}
-                  className="w-full border rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition"
+                  className="w-full border rounded-xl px-3 sm:px-4 py-3 bg-gray-50 focus:bg-white focus:border-[#C5A572] outline-none transition text-sm sm:text-base resize-none"
                 />
               </div>
 

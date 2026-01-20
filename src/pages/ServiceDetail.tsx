@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -213,9 +213,11 @@ const servicesData: Service[] = [
 const ServiceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
+    setImageLoading(true);
   }, [id]);
 
   const service = servicesData.find((s) => s.id === id);
@@ -253,12 +255,12 @@ const ServiceDetail: React.FC = () => {
 
           {id !== "telangiectasia" && (
           <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden mb-8">
-              <div className={`relative h-96 overflow-hidden flex items-center justify-center ${
-                service.id === "evlk" ? "bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600" :
-                service.id === "phlebectomy" ? "bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600" :
-                service.id === "sclerotherapy" ? "bg-gradient-to-br from-teal-400 via-teal-500 to-teal-600" :
-                "bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600"
-              }`}>
+              <div className="relative h-96 overflow-hidden flex items-center justify-center bg-white">
+                {imageLoading && service.image && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-white">
+                    <div className="w-16 h-16 border-4 border-gray-200 border-t-[#1C2A44] rounded-full animate-spin"></div>
+                  </div>
+                )}
                 {service.video ? (
                   <video
                     src={service.video}
@@ -272,7 +274,11 @@ const ServiceDetail: React.FC = () => {
               <img
                 src={service.image}
                 alt={service.title}
-                    className="object-cover w-full h-full"
+                    className={`object-cover w-full h-full transition-opacity duration-300 ${
+                      imageLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    onLoad={() => setImageLoading(false)}
+                    onError={() => setImageLoading(false)}
               />
                 ) : null}
               </div>

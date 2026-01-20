@@ -26,7 +26,7 @@ const AppContent: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F6F3]">
+    <div className="min-h-screen flex flex-col bg-[#F7F6F3] overflow-x-hidden">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services/:id" element={<ServiceDetail />} />
