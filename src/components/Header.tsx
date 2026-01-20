@@ -79,7 +79,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="h-20 flex items-center justify-between">
 
-          <a href="#top" className="flex items-center gap-4 group/logo">
+          <div className="flex items-center gap-4 group/logo cursor-default">
             <div className="h-12 w-12 rounded-2xl bg-[#1C2A44] text-white flex items-center justify-center text-sm font-semibold shadow transition-transform duration-300 group-hover/logo:scale-105">
               МВ
             </div>
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
                 врач-флеболог
               </div>
             </div>
-          </a>
+          </div>
 
           <nav className="hidden md:flex items-center gap-10 text-sm font-medium text-[#1C2A44]">
 

@@ -1,5 +1,5 @@
 import React from "react";
-import qrCode from "../images/qr.jpg";
+import qrCode from "../images/qr.png";
 
 const ReviewsSection: React.FC = () => {
   return (

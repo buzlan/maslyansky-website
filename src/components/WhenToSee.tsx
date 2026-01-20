@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface PhotoSlide {
   image: string;
@@ -8,30 +8,42 @@ interface PhotoSlide {
 const WhenToSee: React.FC = () => {
   const photos: PhotoSlide[] = [
     {
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=500&fit=crop&auto=format",
-      caption: "Факторы риска - Наследственность"
+      image: "/images/factor-risk-pregnancy.png",
+      caption: "Беременность как фактор риска развития варикоза"
     },
     {
-      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=500&fit=crop",
-      caption: "Факторы риска - Образ жизни"
+      image: "/images/factor-risk-travel.jpeg",
+      caption: "Длительные перелеты и поездки"
     },
     {
-      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&h=500&fit=crop",
-      caption: "Факторы риска - Возраст"
+      image: "/images/factor-risk-obesity.jpeg",
+      caption: "Избыточная масса тела и ожирение"
     }
   ];
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (photos.length <= 1) return;
 
-    const interval = setInterval(() => {
+    // Очищаем предыдущий интервал
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    // Запускаем новый интервал
+    intervalRef.current = setInterval(() => {
       setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
     }, 5000);
 
-    return () => clearInterval(interval);
-  }, [photos.length]);
+    // Очистка при размонтировании или изменении зависимостей
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [currentPhotoIndex, photos.length]);
 
   const nextPhoto = () => {
     setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
@@ -108,12 +120,13 @@ const WhenToSee: React.FC = () => {
 
           {/* Правая часть - фото */}
           <div className="flex justify-center md:justify-start h-full">
-            <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-full max-w-[400px] relative h-full flex flex-col">
-              <div className="flex-1 bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center relative overflow-hidden min-h-0">
+            <div className="bg-white rounded-3xl shadow-xl border border-white/70 overflow-hidden w-full max-w-[400px] relative flex flex-col">
+              <div className="bg-gradient-to-br from-gray-300 via-gray-200 to-gray-100 flex items-center justify-center relative overflow-hidden" style={{ height: '500px' }}>
                 <img
                   src={photos[currentPhotoIndex].image}
                   alt={photos[currentPhotoIndex].caption}
                   className="w-full h-full object-cover transition-opacity duration-500"
+                  style={{ objectPosition: 'center' }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = `https://via.placeholder.com/400x500/E5E7EB/9CA3AF?text=Фото+${currentPhotoIndex + 1}`;
