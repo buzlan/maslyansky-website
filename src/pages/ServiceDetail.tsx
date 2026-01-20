@@ -468,12 +468,21 @@ const ServiceDetail: React.FC = () => {
                       ))}
                     </ul>
                     {service.image && (
-                      <div className="max-w-2xl mx-auto">
-                        <img
-                          src={service.image}
-                          alt="Сосудистые звёздочки на ногах"
-                          className="w-full h-auto object-contain max-h-96 rounded-lg"
-                        />
+                      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+                        <div className="rounded-lg overflow-hidden h-[400px]">
+                          <img
+                            src={service.image}
+                            alt="Сосудистые звёздочки на ногах"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="rounded-lg overflow-hidden h-[400px]">
+                          <img
+                            src="/images/tele2detailed.jpeg"
+                            alt="Лечение сосудистых звёздочек"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
