@@ -22,7 +22,7 @@ const WhenToSee: React.FC = () => {
   ];
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (photos.length <= 1) return;
