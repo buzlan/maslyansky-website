@@ -70,7 +70,9 @@ const ServicesGrid: React.FC = () => {
               </div>
 
               <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                <span className="text-[#1C2A44] text-xl font-bold">→</span>
+                <svg className="w-5 h-5 text-[#1C2A44]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
               </div>
             </Link>
           ))}
