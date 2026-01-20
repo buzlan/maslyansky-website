@@ -2,7 +2,6 @@ import { useLayoutEffect, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import Header from "../components/Header"
 import Hero from "../components/Hero"
-import AboutSection from "../components/AboutSection"
 import WhenToSee from "../components/WhenToSee"
 import Services from "../components/Services"
 import ServicesGrid from "../components/ServicesGrid"
@@ -53,9 +52,6 @@ const Home: React.FC = () => {
 
       <main className="flex-1">
         <Hero />
-        <ScrollAnimation>
-          <AboutSection />
-        </ScrollAnimation>
         <ScrollAnimation delay={100}>
           <WhenToSee />
         </ScrollAnimation>
